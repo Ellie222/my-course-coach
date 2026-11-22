@@ -1,6 +1,7 @@
 // 데이터 계층: Supabase의 4개 테이블(topics, materials, questions, feedback_rules)을 읽습니다.
 // 화면(app.js)은 loadAll()만 사용하므로 화면 코드는 바뀌지 않습니다.
-import { CONFIG } from "./config.js";
+import { getConfig } from "./config.js";
+let CONFIG;
 
 const TABLES = {
   topics: "topic_id,title,learning_objective,difficulty&order=topic_id",
@@ -20,8 +21,9 @@ async function fetchTable(name) {
 }
 
 export async function loadAll() {
+  CONFIG = await getConfig();
   if (!CONFIG.supabaseUrl || !CONFIG.supabaseKey)
-    throw new Error(".env.local에 SUPABASE_URL과 SUPABASE_PUBLISHABLE_KEY를 설정한 뒤 서버를 다시 실행하세요.");
+    throw new Error("SUPABASE_URL과 SUPABASE_PUBLISHABLE_KEY가 비어 있습니다. 로컬은 .env.local, Vercel은 Environment Variables에 설정한 뒤 다시 실행·배포하세요.");
   const [topics, materials, questions, rules] = await Promise.all(Object.keys(TABLES).map(fetchTable));
   return {
     topics,

@@ -16,3 +16,7 @@
 ## 주의
 - `.env.local`은 `.gitignore`에 포함되어 Git에 올라가지 않습니다.
 - service_role(secret) 키는 절대 넣지 마세요. 브라우저에는 publishable 키만 사용합니다.
+
+## Vercel 배포
+Settings → Environment Variables에 `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`를 추가하고 Redeploy 합니다.
+`api/env.js`가 이 값을 읽고, `vercel.json`이 `/js/env.js` 요청을 그 함수로 연결합니다.
