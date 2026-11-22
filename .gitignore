@@ -1,0 +1,15 @@
+# 환경변수·비밀키
+.env
+.env.local
+.env*.local
+*.pem
+*.key
+# 의존성·빌드 결과
+node_modules/
+.next/
+out/
+dist/
+# 기타
+*.zip
+.DS_Store
+artifact.html
